@@ -1,0 +1,164 @@
+set SUPPLIER :=  McNeil   Contracts   VCE_GT  Market  VCE_Wind;
+set YEARS := 2009    2010    2011    2012    2013    2014;
+set BLOCKS := block1 block2  block3  block4  block5;
+set DSM :=
+"Business: New Construction"
+"Business: Existing Facilities"
+"Residential: New Construction"
+"Residential: Existing Homes"
+"Retail Products"
+"Commercial Smartlight"
+"Commercial Heating A/C"
+"Commercial Outdoor Lightning"
+"LED Streetlight Program";
+
+param dsm_implemented_param :=
+"Business: New Construction"    False
+"Business: Existing Facilities" False
+"Residential: New Construction" False
+"Residential: Existing Homes"   False
+"Retail Products"               False
+"Commercial Smartlight"         False
+"Commercial Heating A/C"        False
+"Commercial Outdoor Lightning"  False
+"LED Streetlight Program"       False;
+
+param dsm_direct_cost :=
+"Business: New Construction"    240480
+"Business: Existing Facilities" 353622
+"Residential: New Construction" 103852
+"Residential: Existing Homes"   127170
+"Retail Products"               88861
+"Commercial Smartlight"         26205
+"Commercial Heating A/C"        30165
+"Commercial Outdoor Lightning"  18432
+"LED Streetlight Program"       46240;
+
+param dsm_MW_savings :=
+"Business: New Construction" block1 0.246
+"Business: New Construction" block2 0.228
+"Business: New Construction" block3 0.201
+"Business: New Construction" block4 0.184
+"Business: New Construction" block5 0.164
+"Business: Existing Facilities" block1  0.313
+"Business: Existing Facilities" block2  0.259
+"Business: Existing Facilities" block3  0.213
+"Business: Existing Facilities" block4  0.176
+"Business: Existing Facilities" block5  0.143
+"Residential: New Construction" block1  0.026
+"Residential: New Construction" block2  0.018
+"Residential: New Construction" block3  0.013
+"Residential: New Construction" block4  0.010
+"Residential: New Construction" block5  0.100
+"Residential: Existing Homes" block1    0.085
+"Residential: Existing Homes" block2    0.153
+"Residential: Existing Homes" block3    0.147
+"Residential: Existing Homes" block4    0.138
+"Residential: Existing Homes" block5    0.132
+"Retail Products" block1    0.128
+"Retail Products" block2    0.142
+"Retail Products" block3    0.139
+"Retail Products" block4    0.136
+"Retail Products" block5    0.137
+"Commercial Smartlight" block1  0.024
+"Commercial Smartlight" block2  0.016
+"Commercial Smartlight" block3  0.014
+"Commercial Smartlight" block4  0.012
+"Commercial Smartlight" block5  0.012
+"Commercial Heating A/C" block1 0.016
+"Commercial Heating A/C" block2 0.018
+"Commercial Heating A/C" block3 0.020
+"Commercial Heating A/C" block4 0.022
+"Commercial Heating A/C" block5 0.024
+"Commercial Outdoor Lightning" block1   0.008
+"Commercial Outdoor Lightning" block2   0.010
+"Commercial Outdoor Lightning" block3   0.009
+"Commercial Outdoor Lightning" block4   0.010
+"Commercial Outdoor Lightning" block5   0.011
+"LED Streetlight Program" block1    0.032
+"LED Streetlight Program" block2    0.028
+"LED Streetlight Program" block3    0.024
+"LED Streetlight Program" block4    0.026
+"LED Streetlight Program" block5    0.032;
+
+param dsm_budget_cap := 800000;
+param emission_cap := 100000;
+param dsm_max := 1;
+
+param  discount_factor :=
+2009     1.0
+2010     0.93
+2011     0.87
+2012     0.82
+2013     0.76
+2014     0.71;
+
+param demand :=
+block1  60.1
+block2  49.4
+block3  42.0
+block4  32.8
+block5  27.1;
+
+param load_hours :=
+block1  365
+block2  830
+block3  4125
+block4  2960
+block5  480;
+
+param supply_cost :=
+McNeil  block1  50.90
+McNeil  block2  50.90
+McNeil  block3  50.90
+McNeil  block4  50.90
+McNeil  block5  50.90
+Contracts  block1  60.00
+Contracts  block2  60.00
+Contracts  block3  60.00
+Contracts  block4  60.00
+Contracts  block5  60.00
+VCE_GT block1   150.00
+VCE_GT block2   150.00
+VCE_GT block3   150.00
+VCE_GT block4   150.00
+VCE_GT block5   150.00
+Market  block1  300.00
+Market  block2  170.00
+Market  block3  65.00
+Market  block4  43.00
+Market  block5  15.00
+VCE_Wind block1 76.80
+VCE_Wind block2 76.80
+VCE_Wind block3 76.80
+VCE_Wind block4 76.80
+VCE_Wind block5 76.80;
+
+param available_supply :=
+McNeil  26.5
+Contracts   14.9
+VCE_GT  18.0
+Market  50.0
+VCE_Wind    5.2;
+
+param cost_increase :=
+McNeil  1.03
+Contracts   1.04
+VCE_GT  1.04
+Market  1.04
+VCE_Wind    1.00;
+
+param carbon_emissions :=
+McNeil  0.028
+Contracts   0.022
+VCE_GT  0.717
+Market  0.491
+VCE_Wind    0.018;
+
+param implemented :=
+VCE_Wind    2009     0
+VCE_Wind    2010     0
+VCE_Wind    2011     0
+VCE_Wind    2012     1
+VCE_Wind    2013     1
+VCE_Wind    2014     1;
